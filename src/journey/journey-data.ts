@@ -159,7 +159,7 @@ export const STATIONS: Station[] = [
     date: '2023',
     age: 'Age 26',
     character: 'adult',
-    mood: 1,
+    mood: 0,
     color: '#8ec9a6',
   },
   {
