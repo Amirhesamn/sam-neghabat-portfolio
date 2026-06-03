@@ -102,6 +102,7 @@ export const STATIONS: Station[] = [
     mood: 0,
     color: '#8ec9a6',
   },
+ 
   {
     id: 'middle',
     type: 'school',
@@ -149,6 +150,18 @@ export const STATIONS: Station[] = [
     color: '#e57a6b',
     note: 'First job. Pivoted to engineering after this role.',
   },
+
+   {
+    id: 'ali-alaei',
+    type: 'workplace',
+    building: 'Meet Ali Alaei', // EDIT: real elementary school
+    subtitle: 'Meet the mentor',
+    date: '2023',
+    age: 'Age 26',
+    character: 'adult',
+    mood: 1,
+    color: '#8ec9a6',
+  },
   {
     id: 'exonyx',
     type: 'workplace',
@@ -188,7 +201,7 @@ export const STATIONS: Station[] = [
     id: 'today',
     type: 'today',
     building: 'Today',
-    subtitle: 'امروز · still building',
+    subtitle: 'Today · still building',
     date: '2026',
     age: 'Age 30',
     character: 'adult',

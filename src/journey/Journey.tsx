@@ -324,7 +324,7 @@ export function Journey() {
       {/* current station */}
       <div className="station-pop swap" key={activeIdx} aria-live="polite">
         <div className="station-pop__name">{active.building}</div>
-        {active.subtitle && <div className="station-pop__sub">{active.subtitle} · {active.date}</div>}
+        {active.subtitle && <div style={{color:"black"}} className="station-pop__sub ">{active.subtitle} · {active.date}</div>}
       </div>
 
       {/* HUD */}
