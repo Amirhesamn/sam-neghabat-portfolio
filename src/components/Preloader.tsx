@@ -4,7 +4,7 @@ import { useReducedMotion } from '../hooks/useReducedMotion';
 
 const BOOT = [
   'initializing portfolio.kernel',
-  'mounting /august/wren',
+  'mounting /sam/neghabat',
   'loading fonts · bricolage · jetbrains',
   'warming up animations',
   'compiling experience ████████',
@@ -48,7 +48,7 @@ export function Preloader({ onDone }: { onDone: () => void }) {
           <div className="w-[min(420px,80vw)]">
             <div className="mb-4 flex items-end justify-between">
               <span className="font-mono text-xs uppercase tracking-[0.2em] text-muted">
-                august_wren<span className="text-accent">.dev</span>
+                sam_neghabat<span className="text-accent">.dev</span>
               </span>
               <span className="font-display text-4xl font-extrabold tabular-nums text-fg">
                 {Math.round(pct)}<span className="text-accent">%</span>

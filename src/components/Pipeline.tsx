@@ -7,7 +7,7 @@ const STAGES = [
   { key: 'build', label: 'build', detail: 'vite build → dist/ (1.1MB)' },
   { key: 'test', label: 'test', detail: '412 passed · 0 failed' },
   { key: 'deploy', label: 'deploy', detail: 'blue-green rollout' },
-  { key: 'live', label: 'live', detail: 'https://augustwren.dev · 200 OK' },
+  { key: 'live', label: 'live', detail: 'https://samneghabat.com · 200 OK' },
 ];
 
 /** Scroll-scrubbed CI pipeline: stages light up and logs stream as you scroll through. */

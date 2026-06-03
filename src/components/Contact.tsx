@@ -1,16 +1,16 @@
-import { useRef, useState } from 'react';
-import { motion } from 'framer-motion';
-import { SectionHeader, Reveal } from './primitives';
-import { PERSON } from '../lib/data';
-import { useReducedMotion } from '../hooks/useReducedMotion';
+import { motion } from "framer-motion";
+import { useRef, useState } from "react";
+import { useReducedMotion } from "../hooks/useReducedMotion";
+import { PERSON } from "../lib/data";
+import { Reveal, SectionHeader } from "./primitives";
 
 type Line = { text: string; cls: string };
 
 export function Contact() {
   const reduced = useReducedMotion();
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [msg, setMsg] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [msg, setMsg] = useState("");
   const [out, setOut] = useState<Line[]>([]);
   const [busy, setBusy] = useState(false);
   const [sent, setSent] = useState(false);
@@ -34,35 +34,60 @@ export function Contact() {
     const emailOk = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email);
 
     if (!name.trim() || !emailOk || !msg.trim()) {
-      const errs: Line[] = [{ text: '➜ validating payload…', cls: 'text-faint' }];
-      if (!name.trim()) errs.push({ text: '✗ name: required — who is transmitting?', cls: 'text-err' });
-      else if (!emailOk) errs.push({ text: `✗ mail: ${email ? `"${email}" is not a valid address` : 'required'}`, cls: 'text-err' });
-      else if (!msg.trim()) errs.push({ text: '✗ msg: empty payload, nothing to send', cls: 'text-err' });
+      const errs: Line[] = [
+        { text: "➜ validating payload…", cls: "text-faint" },
+      ];
+      if (!name.trim())
+        errs.push({
+          text: "✗ name: required — who is transmitting?",
+          cls: "text-err",
+        });
+      else if (!emailOk)
+        errs.push({
+          text: `✗ mail: ${
+            email ? `"${email}" is not a valid address` : "required"
+          }`,
+          cls: "text-err",
+        });
+      else if (!msg.trim())
+        errs.push({
+          text: "✗ msg: empty payload, nothing to send",
+          cls: "text-err",
+        });
       push(errs);
       return;
     }
 
     setBusy(true);
     push([
-      { text: '➜ ./transmit --to sam', cls: 'text-faint' },
-      { text: '› opening socket to samneghabat.dev …', cls: 'text-muted' },
-      { text: `› packing message from ${name} ‹${email}›`, cls: 'text-muted' },
-      { text: '› signing & sending …', cls: 'text-muted' },
-      { text: '✓ 200 — message received. Reply inbound within a day or two.', cls: 'text-ok' },
-      { text: `› thanks for saying hello, ${name.split(' ')[0]}.`, cls: 'text-accent' },
+      { text: "➜ ./transmit --to sam", cls: "text-faint" },
+      { text: "› opening socket to samneghabat.dev …", cls: "text-muted" },
+      { text: `› packing message from ${name} ‹${email}›`, cls: "text-muted" },
+      { text: "› signing & sending …", cls: "text-muted" },
+      {
+        text: "✓ 200 — message received. Reply inbound within a day or two.",
+        cls: "text-ok",
+      },
+      {
+        text: `› thanks for saying hello, ${name.split(" ")[0]}.`,
+        cls: "text-accent",
+      },
     ]);
     const done = setTimeout(
       () => {
         setBusy(false);
         setSent(true);
       },
-      reduced ? 50 : 2700,
+      reduced ? 50 : 2700
     );
     timers.current.push(done);
   };
 
   return (
-    <section id="contact" className="mx-auto max-w-[1600px] px-5 py-24 md:px-10 md:py-36">
+    <section
+      id="contact"
+      className="mx-auto max-w-[1600px] px-5 py-24 md:px-10 md:py-36"
+    >
       <SectionHeader index="05" title="Contact" note="// open a connection" />
 
       <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
@@ -85,7 +110,7 @@ export function Contact() {
                 {PERSON.email}
               </a>
               <a
-                href={`tel:${PERSON.phone.replace(/\s/g, '')}`}
+                href={`tel:${PERSON.phone.replace(/\s/g, "")}`}
                 data-cursor
                 data-cursor-label="call"
                 className="inline-flex w-fit items-center gap-2 font-mono text-sm text-muted transition-colors hover:text-accent"
@@ -105,7 +130,9 @@ export function Contact() {
                   data-cursor
                   className="group flex items-center gap-2 font-mono text-[0.66rem] uppercase tracking-[0.14em] text-muted transition-colors hover:text-fg"
                 >
-                  <span className="text-accent transition-transform group-hover:-translate-y-0.5">↗</span>
+                  <span className="text-accent transition-transform group-hover:-translate-y-0.5">
+                    ↗
+                  </span>
                   {s.label}
                 </a>
               ))}
@@ -121,22 +148,44 @@ export function Contact() {
 
         {/* terminal form */}
         <Reveal delay={0.05}>
-          <div className="overflow-hidden rounded-lg border border-line bg-surface shadow-2xl shadow-black/50" data-cursor="text">
+          <div
+            className="overflow-hidden rounded-lg border border-line bg-surface shadow-2xl shadow-black/50"
+            data-cursor="text"
+          >
             <div className="flex items-center gap-2 border-b border-line px-4 py-2.5">
               <span className="h-3 w-3 rounded-full border border-line bg-err/70" />
               <span className="h-3 w-3 rounded-full border border-line bg-warn/70" />
               <span className="h-3 w-3 rounded-full border border-line bg-ok/70" />
               <span className="ml-3 font-mono text-[0.6rem] uppercase tracking-[0.16em] text-faint">
-                guest@august-wren — bash
+                guest@sam-neghabat — bash
               </span>
             </div>
 
-            <form onSubmit={onSubmit} className="space-y-3 p-5 font-mono text-[0.78rem]">
+            <form
+              onSubmit={onSubmit}
+              className="space-y-3 p-5 font-mono text-[0.78rem]"
+            >
               <div className="text-faint">~ last login: ready when you are</div>
-              <Field label="name" value={name} onChange={setName} placeholder="Ada Lovelace" autoComplete="name" />
-              <Field label="mail" value={email} onChange={setEmail} placeholder="ada@analytical.engine" type="email" autoComplete="email" />
+              <Field
+                label="name"
+                value={name}
+                onChange={setName}
+                placeholder="Ada Lovelace"
+                autoComplete="name"
+              />
+              <Field
+                label="mail"
+                value={email}
+                onChange={setEmail}
+                placeholder="ada@analytical.engine"
+                type="email"
+                autoComplete="email"
+              />
               <div className="flex items-start gap-2">
-                <label htmlFor="c-msg" className="whitespace-nowrap pt-0.5 text-accent">
+                <label
+                  htmlFor="c-msg"
+                  className="whitespace-nowrap pt-0.5 text-accent"
+                >
                   msg&nbsp;:
                 </label>
                 <textarea
@@ -157,12 +206,21 @@ export function Contact() {
                 data-cursor-label="send"
                 className="mt-2 inline-flex items-center gap-2 bg-accent px-4 py-2.5 font-mono text-[0.62rem] uppercase tracking-[0.18em] text-bg transition-opacity disabled:opacity-50"
               >
-                {busy ? 'transmitting…' : sent ? 'sent ✓ — send another' : 'transmit ↵'}
+                {busy
+                  ? "transmitting…"
+                  : sent
+                  ? "sent ✓ — send another"
+                  : "transmit ↵"}
               </button>
 
               <div aria-live="polite" className="space-y-1 pt-2">
                 {out.map((l, i) => (
-                  <motion.div key={i} initial={{ opacity: 0, x: -6 }} animate={{ opacity: 1, x: 0 }} className={`whitespace-pre-wrap ${l.cls}`}>
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, x: -6 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    className={`whitespace-pre-wrap ${l.cls}`}
+                  >
                     {l.text}
                   </motion.div>
                 ))}
@@ -180,7 +238,7 @@ function Field({
   value,
   onChange,
   placeholder,
-  type = 'text',
+  type = "text",
   autoComplete,
 }: {
   label: string;

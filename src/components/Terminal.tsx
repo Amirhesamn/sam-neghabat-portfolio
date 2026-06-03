@@ -29,7 +29,7 @@ export function Terminal() {
         <span className="h-3 w-3 rounded-full border border-line bg-warn/80" />
         <span className="h-3 w-3 rounded-full border border-line bg-ok/80" />
         <span className="ml-3 font-mono text-[0.6rem] uppercase tracking-[0.16em] text-faint">
-          august@wren — zsh — 80×24
+          sam@neghabat — zsh — 80×24
         </span>
       </div>
       {/* body */}
